@@ -2,6 +2,7 @@ package com.example.demo.web.controllers;
 
 import org.springframework.web.servlet.ModelAndView;
 
+
 public abstract class BaseController {
 
     public ModelAndView view(String viewName, ModelAndView modelAndView) {
