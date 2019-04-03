@@ -1,7 +1,13 @@
 package com.example.demo.domein.models.bindings;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class UserRegisterBindingModel {
 
+    @NotNull
+    @Size(min = 3,max =10,message = "username must be between 3 and 10 characters")
     private String username;
 
     public String getUsername() {
@@ -36,8 +42,14 @@ public class UserRegisterBindingModel {
         this.email = email;
     }
 
+    @NotNull
+    @Size(min = 3,max =10,message = "password must be between 3 and 10 characters")
     private String password;
+
     private String confirmPassword;
+
+    @NotNull
+    @Email(message = "Not Valid Email")
     private String email;
 
 }

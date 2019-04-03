@@ -13,35 +13,47 @@
 
     <main>
         <div class="container-fluid rounded">
-            <form th:action="@{/users/register}" method="post">
+            <form th:action="@{/users/register}" method="post" th:object="${bindingModel}">
+                <div class="form-group" th:classappend="${#fields.hasErrors('username')}?'text-danger'" >
+                    <label>
+                        <p class="label-txt rounded">Username:</p>
+                        <input type="text" th:field="*{username}" class="input" name="name">
+                        <div class="line-box">
+                            <div class="line"></div>
+                        </div>
+                        <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
+                    </label>
+                </div>
                 <label>
-                    <p class="label-txt rounded">Username:</p>
-                    <input type="text" class="input" name="username">
-                    <div class="line-box">
-                        <div class="line"></div>
-                    </div>
-                </label>
-                <label>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('username')}?'text-danger'" >
                     <p class="label-txt rounded">Email:</p>
-                    <input type="text" class="input" name="email">
+                    <input type="text"  th:field="*{email}" class="input" name="email">
                     <div class="line-box">
                         <div class="line"></div>
                     </div>
+                        <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
+                    </div>
                 </label>
                 <label>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('username')}?'text-danger'" >
+
                     <p class="label-txt">Password:</p>
-                    <input type="text" class="input" name="password">
+                    <input type="text" th:field="*{password}" class="input" name="password">
                     <div class="line-box">
                         <div class="line"></div>
+                    </div>
+                    <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
                     </div>
                 </label>
 
                 <label>
+
                     <p class="label-txt">Confirm Password:</p>
                     <input type="text" class="input" name="confirmPassword">
                     <div class="line-box">
                         <div class="line"></div>
                     </div>
+
                 </label>
 
                 <button type="submit">submit</button>

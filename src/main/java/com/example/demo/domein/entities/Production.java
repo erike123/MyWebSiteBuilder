@@ -3,7 +3,7 @@ package com.example.demo.domein.entities;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-public class Production {
+public class Production extends BaseEntity {
 
     private Website website;
     private User user;

@@ -1,17 +1,30 @@
 package com.example.demo.domein.entities;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Website {
+@Entity
+@Table(name = "website")
+public class Website extends BaseEntity {
 
     private String Name;
     private String Description;
     private BigDecimal price;
+    private List<Category> categories;
+    private Integer Likes;
+    private String imageUrl;
+    private Company company;
+
+    @Enumerated
+    @Column(name = "company")
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     @Column(name = "name")
     public String getName() {
@@ -61,17 +74,6 @@ public class Website {
     }
 
 
-    @Column(name = "numberOfOrders")
-    public Integer getNumberOfOrders() {
-        return NumberOfOrders;
-    }
-
-    public void setNumberOfOrders(Integer numberOfOrders) {
-        NumberOfOrders = numberOfOrders;
-    }
-
-    private String imageUrl;
-
     @Column(name = "image")
     public String getImageUrl() {
         return imageUrl;
@@ -81,6 +83,12 @@ public class Website {
         this.imageUrl = imageUrl;
     }
 
-    private List<Category> categories;
-    private Integer NumberOfOrders;
+    @Column(name = "likes")
+    public Integer getLikes() {
+        return Likes;
+    }
+
+    public void setLikes(Integer likes) {
+        Likes = likes;
+    }
 }
