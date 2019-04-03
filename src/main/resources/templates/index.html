@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+   <th:block th:include="~{fragments/head}"></th:block>
+</head>
+<body>
+<div class="container-fluid">
+
+   <header>
+      <th:block th:include="~{fragments/navbar}"></th:block>
+   </header>
+
+   <main class="mt-3">
+      <div class="jumbotron bg-light">
+         <h1 class="display-1 font-italic">Web Builder</h1>
+         <hr>
+         <p>
+            This is the best app for choosing ur site layout! <a th:href="@{/users/login}">Login</a>, if you don't have an account,
+            don't hesitate - <a th:href="@{/users/register}">Register</a>
+         </p>
+      </div>
+   </main>
+
+
+</div>
+
+<footer>
+   <th:block th:include="~{fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

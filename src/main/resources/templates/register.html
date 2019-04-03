@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{fragments/head}"></th:block>
+    <th:block th:include="~{fragments/header}"></th:block>
+</head>
+<body>
+<div class="container-fluid rounded">
+
+    <header>
+        <th:block th:include="~{fragments/navbar}"></th:block>
+    </header>
+
+    <main>
+        <div class="container-fluid rounded">
+            <form th:action="@{/users/register}" method="post">
+                <label>
+                    <p class="label-txt rounded">Username:</p>
+                    <input type="text" class="input" name="username">
+                    <div class="line-box">
+                        <div class="line"></div>
+                    </div>
+                </label>
+                <label>
+                    <p class="label-txt rounded">Email:</p>
+                    <input type="text" class="input" name="email">
+                    <div class="line-box">
+                        <div class="line"></div>
+                    </div>
+                </label>
+                <label>
+                    <p class="label-txt">Password:</p>
+                    <input type="text" class="input" name="password">
+                    <div class="line-box">
+                        <div class="line"></div>
+                    </div>
+                </label>
+
+                <label>
+                    <p class="label-txt">Confirm Password:</p>
+                    <input type="text" class="input" name="confirmPassword">
+                    <div class="line-box">
+                        <div class="line"></div>
+                    </div>
+                </label>
+
+                <button type="submit">submit</button>
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>
