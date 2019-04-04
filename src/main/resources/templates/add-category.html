@@ -14,10 +14,10 @@
     <form id="add-category-form" class="form w-25 mx-auto" th:action="@{/categories/add}" method="post" th:object="${bindingModel}"><input
             type="hidden" name="_csrf" value="c686cd14-a7f9-4216-8009-c093b7d3df86">
         <div class="form-group">
-            <div class="form-group" th:classappend="${#fields.hasErrors('username')}?'text-danger'">
-                <label for="add-category-name" class="font-weight-bold">Name</label>
+            <div class="form-group" th:classappend="${#fields.hasErrors('name')}?'text-danger'">
+                <label for="add-category-name" class="font-italic">Name</label>
                 <input type="text" th:field="*{name}" class="form-control text-center" id="add-category-name" name="name">
-                <small th:each="error : ${#fields.errors('username')}" th:text="${error}"></small>
+                <small th:each="error : ${#fields.errors('name')}" th:text="${error}"></small>
             </div>
         </div>
         <hr class="hr-2 bg-dark">
