@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class WebSiteServiceImpl implements WebSiteService {
 
@@ -36,6 +39,15 @@ public class WebSiteServiceImpl implements WebSiteService {
         website = this.webSiteRepository.save(website);
         return this.modelMapper.map(website, WebSiteServiceModel.class);
     }
+
+    @Override
+    public List<WebSiteServiceModel> findAllWebSites() {
+        return this.webSiteRepository.findAll()
+                .stream()
+                .map(p -> this.modelMapper.map(p, WebSiteServiceModel.class))
+                .collect(Collectors.toList());
+    }
+
 
     @Override
     public WebSiteServiceModel findById(String id) {

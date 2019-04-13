@@ -2,6 +2,7 @@ package com.example.demo.web.controllers;
 
 import com.example.demo.domein.models.bindings.WebSiteAddBindingModel;
 import com.example.demo.domein.models.service.WebSiteServiceModel;
+import com.example.demo.domein.models.views.WebSiteViewModel;
 import com.example.demo.services.CategoryService;
 import com.example.demo.services.CloudinaryService;
 import com.example.demo.services.WebSiteService;
@@ -58,17 +59,17 @@ public class WebSiteController extends BaseController {
         return super.redirect("/products/all");
     }
 
-//    @GetMapping("/all")
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-//    public ModelAndView allProducts(ModelAndView modelAndView) {
-//        modelAndView.addObject("products", this.productService.findAllProducts()
-//                .stream()
-//                .map(p -> this.modelMapper.map(p, ProductAllViewModel.class))
-//                .collect(Collectors.toList()));
-//
-//        return super.view("product/all-products", modelAndView);
-//    }
-//
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView allProducts(ModelAndView modelAndView) {
+        modelAndView.addObject("websites", this.webSiteService.findAllWebSites()
+                .stream()
+                .map(p -> this.modelMapper.map(p, WebSiteViewModel.class))
+                .collect(Collectors.toList()));
+
+        return super.view("product/all-products", modelAndView);
+    }
+
 //    @GetMapping("/details/{id}")
 //    @PreAuthorize("isAuthenticated()")
 //    public ModelAndView detailsProduct(@PathVariable String id, ModelAndView modelAndView) {
