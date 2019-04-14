@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/websites")
 public class WebSiteController extends BaseController {
 
     private final WebSiteService webSiteService;
@@ -56,7 +56,7 @@ public class WebSiteController extends BaseController {
 
         this.webSiteService.createSite(webSiteServiceModel);
 
-        return super.redirect("/products/all");
+        return super.redirect("/websites/all");
     }
 
     @GetMapping("/all")
@@ -67,7 +67,7 @@ public class WebSiteController extends BaseController {
                 .map(p -> this.modelMapper.map(p, WebSiteViewModel.class))
                 .collect(Collectors.toList()));
 
-        return super.view("product/all-products", modelAndView);
+        return super.view("all-websites", modelAndView);
     }
 
 //    @GetMapping("/details/{id}")

@@ -1,8 +1,12 @@
 package com.example.demo.domein.entities;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "production")
 public class Production extends BaseEntity {
 
     private Website website;

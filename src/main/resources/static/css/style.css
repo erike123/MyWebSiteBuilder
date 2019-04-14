@@ -6,7 +6,7 @@ hr.hr-2 {
     background: transparent;
     border: none;
     font-weight: bold;
-    color: rgba(0, 0, 0, 1) !important;
+    color: rgba(240, 240, 240, 0.04) !important;
 }
 
 .logout-button:hover {
@@ -18,7 +18,7 @@ hr.hr-2 {
 }
 
 img.img-thumbnail {
-    border: 1px solid #ddd; /* Gray border */
+    border: 1px solid rgba(55, 55, 55, 0.74); /* Gray border */
     border-radius: 4px; /* Rounded border */
     padding: 5px; /* Some padding */
     max-width: 40px;

@@ -11,15 +11,32 @@
 <main class="mt-3">
     <h1 class="text-center text-dark">Add Product</h1>
     <hr class="hr-2 bg-dark w-25">
-    <form id="add-product-form" class="form w-25 mx-auto" th:action="@{/products/add}" method="post"
+    <form id="add-product-form" class="form w-25 mx-auto" th:action="@{/websites/add}" method="post"
           enctype="multipart/form-data"><input type="hidden" name="_csrf" value="c686cd14-a7f9-4216-8009-c093b7d3df86">
         <div class="form-group">
             <label for="add-product-name" class="font-weight-bold">Name</label>
             <input type="text" class="form-control text-center" id="add-product-name" name="name">
         </div>
         <div class="form-group">
-            <label for="add-product-description" class="font-weight-bold">Description</label>
-            <textarea name="description" id="add-product-description" cols="41" rows="5"></textarea>
+            <label for="add-website-index" class="font-weight-bold">IndexPage   </label>
+            <select class="mdb-select md-form" id="add-website-index" name="IndexPage">
+                <option value="" disabled selected>Choose your IndexPage</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="add-website-login" class="font-weight-bold">LoginPage   </label>
+            <select class="mdb-select md-form" id="add-website-login" name="LoginPage">
+                <option value="" disabled selected>Choose your LoginPage</option>
+
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="add-website-register" class="font-weight-bold">RegisterPage</label>
+            <select class="mdb-select md-form" id="add-website-register" name="RegisterPage">
+                <option value="" disabled selected>Choose your RegisterPage</option>
+
+            </select>
         </div>
         <div class="form-group">
             <label for="add-product-price" class="font-weight-bold">Price</label>
@@ -29,15 +46,16 @@
 
         </div>
         <div class="form-group">
-            <label for="add-product-categories" class="font-weight-bold">Categories</label>
-            <select multiple="" class="form-control" id="add-product-categories" name="categories">
+            <label for="add-website-categories" class="font-weight-bold">Categories</label>
+            <select multiple="" class="form-control" id="add-website-categories" name="categories">
                 <option selected="" disabled="">--- Select Categories ---</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="add-company" class="font-weight-bold">Companies</label>
-            <select multiple="" class="form-control" id="add-company" name="companies">
-                <option selected="" disabled="">--- Select Company ---</option>
+            <label for="add-website-companies" class="font-weight-bold">Companies</label>
+            <select class="mdb-select md-form" id="add-website-companies" name="company">
+                <option value="" disabled selected>Choose your option</option>
+
             </select>
         </div>
         <div class="form-group">
@@ -58,8 +76,32 @@
     fetch('/categories/fetch')
         .then((response) => response.json())
         .then((json) => {
-            json.forEach((category) => $('#add-product-categories').append(`<option value="${category.id}">${category.name}</option>`));
+            json.forEach((category) => $('#add-website-categories').append(`<option value="${category.id}">${category.name}</option>`));
         })
         .catch((err) => console.log(err));
+    fetch('/categories/fetch/companies')
+        .then((response) => response.json())
+    .then((json) => {
+        json.forEach((company) => $('#add-website-companies').append(`<option>${company}</option>`));
+    })
+    .catch((err) => console.log(err));
+    fetch('/categories/fetch/IndexPage')
+        .then((response) => response.json())
+    .then((json) => {
+        json.forEach((page) => $('#add-website-index').append(`<option>${page.split(".")[0]}</option>`));
+    })
+    .catch((err) => console.log(err));
+    fetch('/categories/fetch/LoginPage')
+        .then((response) => response.json())
+    .then((json) => {
+        json.forEach((page) => $('#add-website-login').append(`<option>${page.split(".")[0]}</option>`));
+    })
+    .catch((err) => console.log(err));
+    fetch('/categories/fetch/RegisterPage')
+        .then((response) => response.json())
+    .then((json) => {
+        json.forEach((page) => $('#add-website-register').append(`<option>${page.split(".")[0]}</option>`));
+    })
+    .catch((err) => console.log(err));
 </script>
 </html>

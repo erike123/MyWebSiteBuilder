@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PhotographyV1</title>
+    <th:block>
+        <link rel="stylesheet" type="text/css" th:href="@{../../static/DependencyCss/PhotographyV1.min.css}">
+    </th:block>
+</head>
+<body>
+
+<div class="bg"></div>
+
+<p class="py-5 text-center">This example creates a full page background image. Try to resize the browser window to see how it always will cover the full screen (when scrolled to top), and that it scales nicely on all screen sizes.</p>
+
+<div class="mask rgba-black-light align-items-center">
+    <!-- Content -->
+    <div class="container">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-12 mb-4 white-text text-center">
+                <h1 class="h1-reponsive white-text text-uppercase font-weight-bold mb-0 pt-md-5 pt-5 wow fadeInDown" data-wow-delay="0.3s"><strong>Minimalist intro</strong></h1>
+                <hr class="hr-light my-4 wow fadeInDown" data-wow-delay="0.4s">
+                <h5 class="text-uppercase mb-4 white-text wow fadeInDown" data-wow-delay="0.4s"><strong>Photography & design</strong></h5>
+                <a href="/templates/LoginPages" class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Login</a>
+                <a class="btn btn-outline-white wow fadeInDown" data-wow-delay="0.4s">Register</a>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    </div>
+    <!-- Content -->
+</div>
+</body>
+</html>

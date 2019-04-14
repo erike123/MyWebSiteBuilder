@@ -9,7 +9,9 @@ import java.util.List;
 public class Website extends BaseEntity {
 
     private String Name;
-    private String Description;
+    private String LoginPage;
+    private String IndexPage;
+    private String RegisterPage;
     private BigDecimal price;
     private List<Category> categories;
     private Integer Likes;
@@ -35,14 +37,33 @@ public class Website extends BaseEntity {
         Name = name;
     }
 
-    @Column(name = "description")
-    public String getDescription() {
-        return Description;
+    @Column(name = "login_page")
+    public String getLoginPage() {
+        return LoginPage;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setLoginPage(String loginPage) {
+        LoginPage = loginPage;
     }
+
+    @Column(name = "index_page")
+    public String getIndexPage() {
+        return IndexPage;
+    }
+
+    public void setIndexPage(String indexPage) {
+        IndexPage = indexPage;
+    }
+
+    @Column(name = "register_page")
+    public String getRegisterPage() {
+        return RegisterPage;
+    }
+
+    public void setRegisterPage(String registerPage) {
+        RegisterPage = registerPage;
+    }
+
 
     @Column(name = "price")
     public BigDecimal getPrice() {
@@ -89,6 +110,6 @@ public class Website extends BaseEntity {
     }
 
     public void setLikes(Integer likes) {
-        Likes = likes;
+        Likes = 0;
     }
 }

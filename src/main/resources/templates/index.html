@@ -2,30 +2,51 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
    <th:block th:include="~{fragments/head}"></th:block>
+   <th:block>
+      <link rel="stylesheet" type="text/css" th:href="@{../static/css/style2.css}">
+      <script th:src="@{../static/js/home.min.js}"></script>
+   </th:block>
 </head>
 <body>
-<div class="container-fluid">
 
-   <header>
-      <th:block th:include="~{fragments/navbar}"></th:block>
-   </header>
+<!-- Main navigation -->
+<header>
 
-   <main class="mt-3">
-      <div class="jumbotron bg-light">
-         <h1 class="display-1 font-italic">Web Builder</h1>
-         <hr>
-         <p>
-            This is the best app for choosing ur site layout! <a th:href="@{/users/login}">Login</a>, if you don't have an account,
-            don't hesitate - <a th:href="@{/users/register}">Register</a>
-         </p>
+   <!-- Full Page Intro -->
+   <div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/architecture.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <!-- Mask & flexbox options-->
+      <div class="mask rgba-gradient align-items-center">
+         <!-- Content -->
+         <div class="container">
+            <!--Grid row-->
+            <div class="row">
+               <!--Grid column-->
+               <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                  <h1 class="h1-responsive font-weight-bold mt-sm-5">Make purchases with our app </h1>
+                  <hr class="hr-light">
+                  This is the biggest, best online shop! <a th:href="@{/users/login}">Login</a>, if you don't have an account,
+                  don't hesitate - <a th:href="@{/users/register}">Register</a>
+               </div>
+               <!--Grid column-->
+               <!--Grid column-->
+               <div class="col-md-6 col-xl-5 mt-xl-5 wow fadeInRight" data-wow-delay="0.3s">
+                  <img src="https://mdbootstrap.com/img/Mockups/Transparent/Small/admin-new.png" alt="" class="img-fluid">
+               </div>
+               <!--Grid column-->
+            </div>
+            <!--Grid row-->
+         </div>
+         <!-- Content -->
       </div>
-   </main>
-
-
-</div>
-
+      <!-- Mask & flexbox options-->
+   </div>
+   <!-- Full Page Intro -->
+</header>
 <footer>
    <th:block th:include="~{fragments/footer}"></th:block>
 </footer>
+
 </body>
 </html>
+
+

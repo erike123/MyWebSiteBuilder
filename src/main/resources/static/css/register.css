@@ -1,16 +1,16 @@
 
 
 body {
-    background: #47484b;
+    background: rgba(165, 165, 178, 0.09);
 }
 form {
     width: 60%;
     margin: 60px auto;
-    background: #dddddd;
+    background: rgba(87, 87, 87, 0.83);
     padding: 60px 120px 80px 120px;
     text-align: center;
-    -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 2px 2px 3px rgba(251, 251, 251, 0.16);
+    box-shadow: 2px 2px 3px rgba(247, 247, 247, 0.66);
 }
 label {
     display: block;
@@ -24,7 +24,7 @@ label {
     font-family: sans-serif;
     font-size: .8em;
     letter-spacing: 1px;
-    color: rgb(120,120,120);
+    color: rgb(72, 72, 72);
     transition: ease .3s;
 }
 .input {

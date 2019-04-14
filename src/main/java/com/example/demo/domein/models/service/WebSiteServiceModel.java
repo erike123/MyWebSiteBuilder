@@ -9,7 +9,9 @@ import java.util.List;
 public class WebSiteServiceModel {
 
     private String Name;
-    private String Description;
+    private String LoginPage;
+    private String IndexPage;
+    private String RegisterPage;
     private BigDecimal price;
     private List<CategoryServiceModel> categories;
     private Integer Likes;
@@ -26,12 +28,28 @@ public class WebSiteServiceModel {
         Name = name;
     }
 
-    public String getDescription() {
-        return Description;
+    public String getLoginPage() {
+        return LoginPage;
     }
 
-    public void setDescription(String description) {
-        Description = description;
+    public void setLoginPage(String loginPage) {
+        LoginPage = loginPage;
+    }
+
+    public String getIndexPage() {
+        return IndexPage;
+    }
+
+    public void setIndexPage(String indexPage) {
+        IndexPage = indexPage;
+    }
+
+    public String getRegisterPage() {
+        return RegisterPage;
+    }
+
+    public void setRegisterPage(String registerPage) {
+        RegisterPage = registerPage;
     }
 
     public BigDecimal getPrice() {

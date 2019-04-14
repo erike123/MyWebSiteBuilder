@@ -10,7 +10,10 @@ public class WebSiteAddBindingModel {
 
 
     private String name;
-    private String description;
+    private String LoginPage;
+    private String IndexPage;
+    private String RegisterPage;
+    private String company;
     private BigDecimal price;
     private MultipartFile image;
     private List<String> categories;
@@ -26,12 +29,28 @@ public class WebSiteAddBindingModel {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getLoginPage() {
+        return LoginPage;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setLoginPage(String loginPage) {
+        LoginPage = loginPage;
+    }
+
+    public String getIndexPage() {
+        return IndexPage;
+    }
+
+    public void setIndexPage(String indexPage) {
+        IndexPage = indexPage;
+    }
+
+    public String getRegisterPage() {
+        return RegisterPage;
+    }
+
+    public void setRegisterPage(String registerPage) {
+        RegisterPage = registerPage;
     }
 
     public BigDecimal getPrice() {
@@ -66,6 +85,5 @@ public class WebSiteAddBindingModel {
         this.company = company;
     }
 
-    private String company;
 
 }
