@@ -23,17 +23,27 @@
         </thead>
         <tbody>
         <th:block th:each="website, iter : ${websites}">
-            <tr class="row mx-auto">
-                <th class="col-md-1 text-center" th:text="${iter.index + 1}"></th>
-                <td class="col-md-3"><div class="text-center"><img th:src="${website.imageUrl}" width="40" height="40" alt="Website"></div></td>
-                <td class="col-md-3 text-center" th:text="${website.name}"></td>
-                <td class="col-md-2 text-center" th:text="${website.price}"></td>
-                <td class="col-md-3 text-center">
-                    <a th:href="@{/websites/details/{id}(id=${website.id})}" class="btn btn-secondary font-weight-bold text-white">Details</a>
-                    <a th:href="@{/websites/edit/{id}(id=${website.id})}" class="btn btn-success font-weight-bold text-white">Edit</a>
-                    <a th:href="@{/websites/delete/{id}(id=${website.id})}" class="btn btn-danger font-weight-bold text-white">Delete</a>
-                </td>
-            </tr>
+
+
+
+                <form th:action="@{/websites/delete/{id}(id=${website.id})}" method="post">
+                    <tr class="row mx-auto">
+                    <th class="col-md-1 text-center" th:text="${iter.index + 1}"></th>
+                    <td class="col-md-3">
+                        <div class="text-center"><img th:src="${website.imageUrl}" width="40" height="40" alt="Website">
+                        </div>
+                    </td>
+                    <td class="col-md-3 text-center" th:text="${website.name}"></td>
+                    <td class="col-md-2 text-center" th:text="${website.price}"></td>
+                    <td class="col-md-3 text-center">
+                        <a th:href="@{/websites/details/{id}(id=${website.id})}" class="btn btn btn-outline-info">Details</a>
+                        <a th:href="@{/websites/edit/{id}(id=${website.id})}" class="btn btn btn-outline-dark">Edit</a>
+                        <button type="submit" class="btn btn btn-outline-danger">Delete</button>
+                    </td>
+                    </tr>
+                </form>
+
+
         </th:block>
         </tbody>
     </table>

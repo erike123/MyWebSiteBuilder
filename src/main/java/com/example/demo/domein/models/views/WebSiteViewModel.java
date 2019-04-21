@@ -1,12 +1,52 @@
 package com.example.demo.domein.models.views;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class WebSiteViewModel {
 
     private String id;
     private String name;
+
+    private List<String> categories;
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public String getLoginPage() {
+        return LoginPage;
+    }
+
+    public void setLoginPage(String loginPage) {
+        LoginPage = loginPage;
+    }
+
+    public String getIndexPage() {
+        return IndexPage;
+    }
+
+    public void setIndexPage(String indexPage) {
+        IndexPage = indexPage;
+    }
+
+    public String getRegisterPage() {
+        return RegisterPage;
+    }
+
+    public void setRegisterPage(String registerPage) {
+        RegisterPage = registerPage;
+    }
+
     private BigDecimal price;
+    private String LoginPage;
+    private String IndexPage;
+    private String RegisterPage;
+    private String imageUrl;
 
     public String getId() {
         return id;
@@ -48,7 +88,6 @@ public class WebSiteViewModel {
         this.likes = likes;
     }
 
-    private String imageUrl;
     private Integer likes;
 
 }

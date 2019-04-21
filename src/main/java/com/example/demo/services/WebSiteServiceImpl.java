@@ -1,5 +1,7 @@
 package com.example.demo.services;
 
+import ch.qos.logback.core.joran.action.IADataForComplexProperty;
+import com.example.demo.domein.entities.Category;
 import com.example.demo.domein.entities.Website;
 import com.example.demo.domein.models.service.WebSiteServiceModel;
 import com.example.demo.repository.WebSiteRepository;
@@ -50,7 +52,48 @@ public class WebSiteServiceImpl implements WebSiteService {
 
 
     @Override
-    public WebSiteServiceModel findById(String id) {
-        return null;
+    public WebSiteServiceModel findById(String id){
+        Website website = this.webSiteRepository.findById(id).orElse(null);
+        return this.modelMapper.map(website,WebSiteServiceModel.class);
+    }
+
+    @Override
+    public Boolean deleteWebSite(String id) {
+      Website website=this.webSiteRepository.findById(id).orElse(null);
+
+      if (website!=null){
+
+          this.webSiteRepository.delete(website);
+      }
+      else{
+          return false;
+      }
+
+      return true;
+    }
+
+    @Override
+    public WebSiteServiceModel editWebsite(String id, WebSiteServiceModel webSiteServiceModel) {
+       Website website = this.webSiteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException());
+
+        webSiteServiceModel.setCategories(
+                this.categoryService.findAllCategories()
+                        .stream()
+                        .filter(c -> webSiteServiceModel.getCategories().contains(c.getId()))
+                        .collect(Collectors.toList())
+        );
+
+        website.setName(webSiteServiceModel.getName());
+
+        website.setPrice(webSiteServiceModel.getPrice());
+        website.setCategories(
+                webSiteServiceModel.getCategories()
+                        .stream()
+                        .map(c -> this.modelMapper.map(c, Category.class))
+                        .collect(Collectors.toList())
+        );
+
+        return this.modelMapper.map(this.webSiteRepository.saveAndFlush(website), WebSiteServiceModel.class);
     }
 }

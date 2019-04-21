@@ -62,63 +62,47 @@ public class WebSiteController extends BaseController {
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView allProducts(ModelAndView modelAndView) {
-        modelAndView.addObject("websites", this.webSiteService.findAllWebSites()
-                .stream()
-                .map(p -> this.modelMapper.map(p, WebSiteViewModel.class))
-                .collect(Collectors.toList()));
+        modelAndView.addObject("websites", this.webSiteService.findAllWebSites());
 
         return super.view("all-websites", modelAndView);
     }
 
-//    @GetMapping("/details/{id}")
-//    @PreAuthorize("isAuthenticated()")
-//    public ModelAndView detailsProduct(@PathVariable String id, ModelAndView modelAndView) {
-//        modelAndView.addObject("product", this.modelMapper.map(this.productService.findProductById(id), ProductDetailsViewModel.class));
+    @GetMapping("/details/{id}")
+    @PreAuthorize("isAuthenticated()")
+    public ModelAndView detailsProduct(@PathVariable String id, ModelAndView modelAndView) {
+        modelAndView.addObject("website", this.modelMapper.map(this.webSiteService.findById(id), WebSiteViewModel.class));
+
+        return super.view("website-details", modelAndView);
+    }
 //
-//        return super.view("product/details", modelAndView);
-//    }
-//
-//    @GetMapping("/edit/{id}")
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-//    public ModelAndView editProduct(@PathVariable String id, ModelAndView modelAndView) {
-//        WebSiteServiceModel WebSiteServiceModel = this.productService.findProductById(id);
-//        WebSiteAddBindingModel model = this.modelMapper.map(WebSiteServiceModel, WebSiteAddBindingModel.class);
-//        model.setCategories(WebSiteServiceModel.getCategories().stream().map(c -> c.getName()).collect(Collectors.toList()));
-//
-//        modelAndView.addObject("product", model);
-//        modelAndView.addObject("productId", id);
-//
-//        return super.view("product/edit-product", modelAndView);
-//    }
-//
-//    @PostMapping("/edit/{id}")
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-//    public ModelAndView editProductConfirm(@PathVariable String id, @ModelAttribute WebSiteAddBindingModel model) {
-//        this.productService.editProduct(id, this.modelMapper.map(model, WebSiteServiceModel.class));
-//
-//        return super.redirect("/products/details/" + id);
-//    }
-//
-//    @GetMapping("/delete/{id}")
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-//    public ModelAndView deleteProduct(@PathVariable String id, ModelAndView modelAndView) {
-//        WebSiteServiceModel WebSiteServiceModel = this.productService.findProductById(id);
-//        WebSiteAddBindingModel model = this.modelMapper.map(WebSiteServiceModel, WebSiteAddBindingModel.class);
-//        model.setCategories(WebSiteServiceModel.getCategories().stream().map(c -> c.getName()).collect(Collectors.toList()));
-//
-//        modelAndView.addObject("product", model);
-//        modelAndView.addObject("productId", id);
-//
-//        return super.view("product/delete-product", modelAndView);
-//    }
-//
-//    @PostMapping("/delete/{id}")
-//    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-//    public ModelAndView deleteProductConfirm(@PathVariable String id) {
-//        this.productService.deleteProduct(id);
-//
-//        return super.redirect("/products/all");
-//    }
+    @GetMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView editProduct(@PathVariable String id, ModelAndView modelAndView) {
+        WebSiteServiceModel webSiteServiceModel = this.webSiteService.findById(id);
+        WebSiteViewModel model = this.modelMapper.map(webSiteServiceModel, WebSiteViewModel.class);
+        model.setCategories(webSiteServiceModel.getCategories().stream().map(c -> c.getName()).collect(Collectors.toList()));
+
+        modelAndView.addObject("website", model);
+        modelAndView.addObject("websiteId", id);
+
+        return super.view("edit-website", modelAndView);
+    }
+
+    @PostMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView editProductConfirm(@PathVariable String id, @ModelAttribute WebSiteAddBindingModel model) {
+        this.webSiteService.editWebsite(id, this.modelMapper.map(model, WebSiteServiceModel.class));
+
+        return super.redirect("/websites/details/" + id);
+    }
+
+    @PostMapping("/delete/{id}")
+    @PreAuthorize("hasRole('ROLE_MODERATOR')")
+    public ModelAndView deleteProductConfirm(@PathVariable String id) {
+        this.webSiteService.deleteWebSite(id);
+
+        return super.redirect("/websites/all");
+    }
 //
 //    @GetMapping("/fetch/{category}")
 //    @ResponseBody

@@ -78,7 +78,7 @@ public class CategoryController extends BaseController {
                 this.modelMapper.map(this.categoryService.findCategoryById(id), CategoryViewModel.class)
         );
 
-        return super.view("category/edit-category", modelAndView);
+        return super.view("edit-category", modelAndView);
     }
 
     @PostMapping("/edit/{id}")
@@ -89,12 +89,6 @@ public class CategoryController extends BaseController {
         return super.redirect("/categories/all");
     }
 
-    @GetMapping("/delete/{id}")
-    @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView deleteCategory(@PathVariable String id, ModelAndView modelAndView) {
-
-        return super.redirect("categories/delete/{id}");
-    }
 
     @PostMapping("/delete/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
