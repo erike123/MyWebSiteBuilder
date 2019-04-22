@@ -1,8 +1,10 @@
 package com.example.demo.services;
 
+import com.example.demo.domein.models.bindings.WebSiteAddBindingModel;
 import com.example.demo.domein.models.service.WebSiteServiceModel;
 import com.example.demo.domein.models.views.WebSiteViewModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface WebSiteService {
@@ -15,6 +17,6 @@ public interface WebSiteService {
 
     Boolean deleteWebSite(String id);
 
-    WebSiteServiceModel editWebsite(String id , WebSiteServiceModel webSiteServiceModel);
+    WebSiteServiceModel editWebsite(String id , WebSiteAddBindingModel webSiteAddBindingModel) throws IOException;
 
 }

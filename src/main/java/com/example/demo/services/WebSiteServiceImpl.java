@@ -1,8 +1,8 @@
 package com.example.demo.services;
 
-import ch.qos.logback.core.joran.action.IADataForComplexProperty;
 import com.example.demo.domein.entities.Category;
 import com.example.demo.domein.entities.Website;
+import com.example.demo.domein.models.bindings.WebSiteAddBindingModel;
 import com.example.demo.domein.models.service.WebSiteServiceModel;
 import com.example.demo.repository.WebSiteRepository;
 import com.example.demo.validation.WebSiteValidation;
@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,13 +21,15 @@ public class WebSiteServiceImpl implements WebSiteService {
     private final CategoryService categoryService;
     private final WebSiteValidation webSiteValidation;
     private final ModelMapper modelMapper;
+    private final CloudinaryService cloudinaryService;
 
     @Autowired
-    public WebSiteServiceImpl(WebSiteRepository webSiteRepository, CategoryService categoryService, WebSiteValidation webSiteValidation, ModelMapper modelMapper) {
+    public WebSiteServiceImpl(WebSiteRepository webSiteRepository, CategoryService categoryService, WebSiteValidation webSiteValidation, ModelMapper modelMapper, CloudinaryService cloudinaryService) {
         this.webSiteRepository = webSiteRepository;
         this.categoryService = categoryService;
         this.webSiteValidation = webSiteValidation;
         this.modelMapper = modelMapper;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -73,25 +76,26 @@ public class WebSiteServiceImpl implements WebSiteService {
     }
 
     @Override
-    public WebSiteServiceModel editWebsite(String id, WebSiteServiceModel webSiteServiceModel) {
+    public WebSiteServiceModel editWebsite(String id, WebSiteAddBindingModel webSiteAddBindingModel) throws IOException {
        Website website = this.webSiteRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException());
 
-        webSiteServiceModel.setCategories(
+
+
+        website.setName(webSiteAddBindingModel.getName());
+
+        website.setPrice(webSiteAddBindingModel.getPrice());
+        website.setCategories(
                 this.categoryService.findAllCategories()
                         .stream()
-                        .filter(c -> webSiteServiceModel.getCategories().contains(c.getId()))
+                        .filter(c -> webSiteAddBindingModel.getCategories().contains(c.getId()))
+                        .map(c -> this.modelMapper.map(c, Category.class))
                         .collect(Collectors.toList())
         );
 
-        website.setName(webSiteServiceModel.getName());
 
-        website.setPrice(webSiteServiceModel.getPrice());
-        website.setCategories(
-                webSiteServiceModel.getCategories()
-                        .stream()
-                        .map(c -> this.modelMapper.map(c, Category.class))
-                        .collect(Collectors.toList())
+        website.setImageUrl(
+                this.cloudinaryService.uploadImage(webSiteAddBindingModel.getImage())
         );
 
         return this.modelMapper.map(this.webSiteRepository.saveAndFlush(website), WebSiteServiceModel.class);

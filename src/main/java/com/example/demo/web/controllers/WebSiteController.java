@@ -90,8 +90,9 @@ public class WebSiteController extends BaseController {
 
     @PostMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView editProductConfirm(@PathVariable String id, @ModelAttribute WebSiteAddBindingModel model) {
-        this.webSiteService.editWebsite(id, this.modelMapper.map(model, WebSiteServiceModel.class));
+    public ModelAndView editProductConfirm(@PathVariable String id, @ModelAttribute WebSiteAddBindingModel model) throws IOException {
+        WebSiteServiceModel webSiteServiceModel = this.webSiteService.editWebsite(id, model);
+
 
         return super.redirect("/websites/details/" + id);
     }
