@@ -7,8 +7,17 @@ public class WebSiteViewModel {
 
     private String id;
     private String name;
+    private String imageUrl;
+    private Integer Likes;
+    private BigDecimal price;
 
-    private List<String> categories;
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public List<String> getCategories() {
         return categories;
@@ -18,35 +27,7 @@ public class WebSiteViewModel {
         this.categories = categories;
     }
 
-    public String getLoginPage() {
-        return LoginPage;
-    }
-
-    public void setLoginPage(String loginPage) {
-        LoginPage = loginPage;
-    }
-
-    public String getIndexPage() {
-        return IndexPage;
-    }
-
-    public void setIndexPage(String indexPage) {
-        IndexPage = indexPage;
-    }
-
-    public String getRegisterPage() {
-        return RegisterPage;
-    }
-
-    public void setRegisterPage(String registerPage) {
-        RegisterPage = registerPage;
-    }
-
-    private BigDecimal price;
-    private String LoginPage;
-    private String IndexPage;
-    private String RegisterPage;
-    private String imageUrl;
+    private List<String> categories;
 
     public String getId() {
         return id;
@@ -64,14 +45,6 @@ public class WebSiteViewModel {
         this.name = name;
     }
 
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -81,13 +54,10 @@ public class WebSiteViewModel {
     }
 
     public Integer getLikes() {
-        return likes;
+        return Likes;
     }
 
     public void setLikes(Integer likes) {
-        this.likes = likes;
+        Likes = likes;
     }
-
-    private Integer likes;
-
 }

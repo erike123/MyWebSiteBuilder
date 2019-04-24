@@ -70,7 +70,10 @@ public class WebSiteController extends BaseController {
     @GetMapping("/details/{id}")
     @PreAuthorize("isAuthenticated()")
     public ModelAndView detailsProduct(@PathVariable String id, ModelAndView modelAndView) {
-        modelAndView.addObject("website", this.modelMapper.map(this.webSiteService.findById(id), WebSiteViewModel.class));
+        WebSiteViewModel model = this.modelMapper.map(this.webSiteService.findById(id), WebSiteViewModel.class);
+        model.setCategories(this.webSiteService.findById(id).getCategories().stream()
+        .map(c->c.getName()).collect(Collectors.toList()));
+        modelAndView.addObject("website",model);
 
         return super.view("website-details", modelAndView);
     }
@@ -91,7 +94,7 @@ public class WebSiteController extends BaseController {
     @PostMapping("/edit/{id}")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView editProductConfirm(@PathVariable String id, @ModelAttribute WebSiteAddBindingModel model) throws IOException {
-        WebSiteServiceModel webSiteServiceModel = this.webSiteService.editWebsite(id, model);
+        this.webSiteService.editWebsite(id, model);
 
 
         return super.redirect("/websites/details/" + id);
