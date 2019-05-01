@@ -2,6 +2,7 @@ package com.example.demo.web.controllers;
 
 import com.example.demo.domein.models.bindings.UserRegisterBindingModel;
 import com.example.demo.domein.models.service.UserServiceModel;
+import com.example.demo.domein.models.views.UserAllViewModel;
 import com.example.demo.services.UserService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.naming.Binding;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
@@ -64,5 +67,47 @@ public class UserController extends BaseController {
     @PreAuthorize("isAnonymous()")
     public ModelAndView loginPost(){
         return super.view("home");
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView allUsers(ModelAndView modelAndView) {
+        List<UserAllViewModel> users = this.userService.findAllUsers()
+                .stream()
+                .map(u -> {
+                    UserAllViewModel user = this.modelMapper.map(u, UserAllViewModel.class);
+                    user.setAuthorities(u.getAuthorities().stream().map(a -> a.getAuthority()).collect(Collectors.toSet()));
+
+                    return user;
+                })
+                .collect(Collectors.toList());
+
+        modelAndView.addObject("users", users);
+
+        return super.view("all-users", modelAndView);
+    }
+
+    @PostMapping("/set-user/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setUser(@PathVariable String id) {
+        this.userService.setUserRole(id, "user");
+
+        return super.redirect("/users/all");
+    }
+
+    @PostMapping("/set-moderator/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setModerator(@PathVariable String id) {
+        this.userService.setUserRole(id, "moderator");
+
+        return super.redirect("/users/all");
+    }
+
+    @PostMapping("/set-admin/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ModelAndView setAdmin(@PathVariable String id) {
+        this.userService.setUserRole(id, "admin");
+
+        return super.redirect("/users/all");
     }
 }
