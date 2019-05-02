@@ -36,13 +36,13 @@ public class WebSiteController extends BaseController {
 
     @GetMapping("/add")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addProduct() {
+    public ModelAndView addWebsite() {
         return super.view("add-website");
     }
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
-    public ModelAndView addProductConfirm(@ModelAttribute WebSiteAddBindingModel model) throws IOException {
+    public ModelAndView addWebbSitePost(@ModelAttribute WebSiteAddBindingModel model) throws IOException {
         WebSiteServiceModel webSiteServiceModel = this.modelMapper.map(model, WebSiteServiceModel.class);
         webSiteServiceModel.setCategories(
                 this.categoryService.findAllCategories()
@@ -107,21 +107,19 @@ public class WebSiteController extends BaseController {
 
         return super.redirect("/websites/all");
     }
-//
-//    @GetMapping("/fetch/{category}")
-//    @ResponseBody
-//    public List<ProductAllViewModel> fetchByCategory(@PathVariable String category) {
-//        if(category.equals("all")) {
-//            return this.productService.findAllProducts()
-//                    .stream()
-//                    .map(product -> this.modelMapper.map(product, ProductAllViewModel.class))
-//                    .collect(Collectors.toList());
-//        }
-//
-//        return this.productService.findAllByCategory(category)
-//                .stream()
-//                .map(product -> this.modelMapper.map(product, ProductAllViewModel.class))
-//                .collect(Collectors.toList());
-//    }
+
+    @GetMapping("/fetch/{category}")
+    @ResponseBody
+    public List<WebSiteViewModel> fetchByCategory(@PathVariable String category) {
+        if(category.equals("all")) {
+            return this.webSiteService.findAllWebSites()
+                    .stream()
+                    .map(website -> this.modelMapper.map(website, WebSiteViewModel.class))
+                    .collect(Collectors.toList());
+        }
+
+        return this.webSiteService.findAllByCategory(category);
+
+    }
 
 }

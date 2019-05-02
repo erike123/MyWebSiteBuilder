@@ -4,6 +4,7 @@ import com.example.demo.domein.entities.Category;
 import com.example.demo.domein.entities.Website;
 import com.example.demo.domein.models.bindings.WebSiteAddBindingModel;
 import com.example.demo.domein.models.service.WebSiteServiceModel;
+import com.example.demo.domein.models.views.WebSiteViewModel;
 import com.example.demo.repository.WebSiteRepository;
 import com.example.demo.validation.WebSiteValidation;
 import org.modelmapper.ModelMapper;
@@ -99,5 +100,25 @@ public class WebSiteServiceImpl implements WebSiteService {
         );
 
         return this.modelMapper.map(this.webSiteRepository.saveAndFlush(website), WebSiteServiceModel.class);
+    }
+
+    @Override
+    public List<WebSiteViewModel> findAllByCategory(String category) {
+
+        List<WebSiteViewModel> MyList = this.webSiteRepository.findAll().stream()
+                .map(web -> {
+                   WebSiteViewModel webSiteViewModel = this.modelMapper.map(web, WebSiteViewModel.class);
+                   webSiteViewModel.getCategories().clear();
+                   web.getCategories().forEach(category1 -> webSiteViewModel.getCategories().add(category1.getName()));
+                   return webSiteViewModel;
+                })
+                .filter(web ->
+                        web.getCategories().contains(category))
+
+                .collect(Collectors.toList());
+
+
+        return MyList;
+
     }
 }

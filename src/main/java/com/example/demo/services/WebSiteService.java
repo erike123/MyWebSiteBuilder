@@ -19,4 +19,6 @@ public interface WebSiteService {
 
     WebSiteServiceModel editWebsite(String id , WebSiteAddBindingModel webSiteAddBindingModel) throws IOException;
 
+    List<WebSiteViewModel> findAllByCategory(String category);
+
 }

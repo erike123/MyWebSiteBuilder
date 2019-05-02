@@ -1,9 +1,8 @@
-package com.example.demo.domein.models.service;
+package com.example.demo.domein.models.views;
 
-import java.util.Set;
+public class UserProfileViewModel {
 
-public class UserServiceModel extends BaseServiceModel {
-
+    private String id;
     private String username;
     private String password;
     private String email;
@@ -17,9 +16,12 @@ public class UserServiceModel extends BaseServiceModel {
         this.imageUrl = imageUrl;
     }
 
-    private Set<RoleServiceModel> authorities;
+    public String getId() {
+        return id;
+    }
 
-    public UserServiceModel() {
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -44,13 +46,5 @@ public class UserServiceModel extends BaseServiceModel {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<RoleServiceModel> getAuthorities() {
-        return authorities;
-    }
-
-    public void setAuthorities(Set<RoleServiceModel> authorities) {
-        this.authorities = authorities;
     }
 }

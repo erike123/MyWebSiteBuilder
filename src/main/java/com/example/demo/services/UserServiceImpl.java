@@ -64,13 +64,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserServiceModel editUserProfile(UserServiceModel userServiceModel, String oldPassword) {
+    public UserServiceModel editUserProfile(UserServiceModel userServiceModel) {
         User user = this.userRepository.findByUsername(userServiceModel.getUsername())
                 .orElseThrow(()-> new UsernameNotFoundException("Username not found!"));
-
-        if (!this.bCryptPasswordEncoder.matches(oldPassword, user.getPassword())) {
-            throw new IllegalArgumentException("Incorrect password!");
-        }
 
         user.setPassword(!"".equals(userServiceModel.getPassword()) ?
                 this.bCryptPasswordEncoder.encode(userServiceModel.getPassword()) :

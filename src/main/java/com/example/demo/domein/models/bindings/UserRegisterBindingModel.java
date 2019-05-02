@@ -1,5 +1,7 @@
 package com.example.demo.domein.models.bindings;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -9,6 +11,9 @@ public class UserRegisterBindingModel {
     @NotNull
     @Size(min = 3,max =10,message = "username must be between 3 and 10 characters")
     private String username;
+
+
+
 
     public String getUsername() {
         return username;

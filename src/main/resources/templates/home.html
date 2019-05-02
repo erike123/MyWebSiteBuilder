@@ -30,39 +30,42 @@
             </div>
             <div class="data col-md-8">
                 <h1 class="text-center font-weight-bold">Products</h1>
-                <div class="products-data"></div>
+                <div class="websites-data"></div>
             </div>
         </div>
     </main>
     <th:block th:replace="fragments/footer"></th:block>
 </div>
 <script>
-    function formatProduct(product) {
-        return '<div class="product">'
+    function formatProduct(website) {
+        return '<div class="website">'
             + '<div class="text-center">'
-            + `<a href="/products/details/${product.id}"><img src="${product.imageUrl}" class="product-image-home img-thumbnail px-auto" alt="Image not loaded..."/></a>`
+            + `<a href="/websites/details/${website.id}"><img src="${website.imageUrl}" class="website-image-home img-thumbnail px-auto" alt="Image not loaded..."/></a>`
             + '</div>'
-            + `<h5 class="text-center font-weight-bold mt-3">Name: ${product.name}</h5>`
-            + `<h5 class="text-center font-weight-bold">Price: ${product.price.toFixed(2)}</h5>`
+            + `<h5 class="text-center font-weight-bold mt-3">Name: ${website.name}</h5>`
+            + `<h5 class="text-center font-weight-bold">Price: ${website.price.toFixed(2)}</h5>`
             + '</div>'
     }
 
     $('input[type=radio][name=selection]').change(function () {
         let category = $(this).val();
 
-        fetch('http://localhost:8000/products/fetch/' + category)
+        fetch('http://localhost:8000/websites/fetch/' + category)
             .then((response) => response.json())
     .then((json) => {
-            $('.products-data').empty();
+            $('.websites-data').empty();
+
 
         if (json.length === 0) {
-            $('.products-data').append(`<h1 class="text-center font-weight-bold">There are no products in the ${category} category.</h1>`)
+            $('.websites-data').append(`<h1 class="text-center font-weight-bold">There are no website in the ${category} category.</h1>`)
         } else {
             for (let i = 0; i < json.length; i += 3) {
-                $('.products-data').append('<div class="products-row row d-flex justify-content-around mt-5">');
-                if(i < json.length) $('.products-data .products-row:last-child').append(formatProduct(json[i]));
-                if(i + 1 < json.length) $('.products-data .products-row:last-child').append(formatProduct(json[i + 1]));
-                if(i + 2 < json.length) $('.products-data .products-row:last-child').append(formatProduct(json[i + 2]));
+                console.log(json.length);
+                $('.websites-data').append('<div class="products-row row d-flex justify-content-around mt-5">');
+                console.log(json[i]);
+                if(i < json.length) $('.websites-data .products-row:last-child').append(formatProduct(json[i]));
+                if(i + 1 < json.length) $('.websites-data .products-row:last-child').append(formatProduct(json[i + 1]));
+                if(i + 2 < json.length) $('.websites-data .products-row:last-child').append(formatProduct(json[i + 2]));
             }
         }
     })
@@ -70,3 +73,4 @@
 </script>
 </body>
 </html>
+
